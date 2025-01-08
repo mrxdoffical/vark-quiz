@@ -1,3 +1,15 @@
 from django.db import models
 
-# Create your models here.
+class Question(models.Model):
+    text = models.CharField(max_length=255)
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text = models.CharField(max_length=255)
+    is_correct = models.BooleanField(default=False)
+
+class QuizResult(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    is_correct = models.BooleanField(default=False)
