@@ -1,0 +1,7 @@
+<!-- vark_quiz/quiz/templates/quiz/home.html -->
+<h1>Quiz Home</h1>
+<ul>
+  {% for question in questions %}
+    <li><a href="{% url 'quiz_question' question.id %}">{{ question.text }}</a></li>
+  {% endfor %}
+</ul>

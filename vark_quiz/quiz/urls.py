@@ -1,12 +1,9 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+# vark_quiz/quiz/urls.py
+from django.urls import path
 from . import views
 
-router = DefaultRouter()
-router.register(r'questions', views.QuestionViewSet)
-router.register(r'answers', views.AnswerViewSet)
-router.register(r'results', views.QuizResultViewSet)
-
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', views.quiz_home, name='quiz_home'),
+    path('question/<int:question_id>/', views.quiz_question, name='quiz_question'),
+    path('result/<int:question_id>/', views.quiz_result, name='quiz_result'),
 ]

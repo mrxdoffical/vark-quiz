@@ -1,0 +1,6 @@
+<!-- vark_quiz/quiz/templates/quiz/result.html -->
+<h1>Result</h1>
+<p>Question: {{ result.question.text }}</p>
+<p>Your Answer: {{ result.answer.text }}</p>
+<p>Correct: {{ result.is_correct }}</p>
+<a href="{% url 'quiz_home' %}">Back to Quiz Home</a>
