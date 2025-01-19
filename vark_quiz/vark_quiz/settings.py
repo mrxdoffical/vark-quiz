@@ -35,7 +35,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'quiz',
     'tips',
+    'accounts',
     'allauth',
+    'bootstrap5',
     'allauth.account',
     'allauth.socialaccount',
     'django.contrib.admin',

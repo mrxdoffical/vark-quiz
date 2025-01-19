@@ -6,7 +6,7 @@ from django.http import JsonResponse
 
 def quiz_home(request):
     questions = Question.objects.all()
-    return render(request, 'quiz/homepage.html', {'questions': questions})
+    return render(request, 'templates/quiz/home.html', {'questions': questions})
 
 @login_required
 def quiz_question(request, question_id):

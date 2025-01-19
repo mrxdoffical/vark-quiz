@@ -1,4 +1,4 @@
 from django.shortcuts import redirect, render
 
 def home(request):
-    return render(request, 'quiz/homepage.html')
+    return render(request, 'quiz/home.html')

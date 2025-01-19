@@ -1,7 +1,63 @@
-<!-- vark_quiz/quiz/templates/quiz/home.html -->
-<h1>Quiz Home</h1>
-<ul>
-  {% for question in questions %}
-    <li><a href="{% url 'quiz_question' question.id %}">{{ question.text }}</a></li>
-  {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/stylehome.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <header class="header">
+        <a href="#" class="logo">Quiz</a>
+        <nav class="navbar">
+          <a href="#">Home</a> 
+          <a href="#">About us</a> 
+          <a href="#">contact</a> 
+          <a href="#">service</a>   
+        </nav>
+        <div class="auth-buttons">
+            <a href="{% url 'login' %}">
+                <button class="login">Log In</button>
+            </a>
+            <a href="{% url 'register' %}">
+                <button class="signup">Sign Up</button>
+            </a>
+            <select class="lang">
+                <option value="en" selected>EN</option>
+                <option value="fr">FR</option>
+                <option value="es">ES</option>
+            </select>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="content">
+            <p class="subtitle">LET'S START THE GAME!</p>
+            <h1>Elevate Your Trivia Game to New Heights</h1>
+            <p class="description">Take your love for trivia to the next level with our immersive quiz experience. Challenge yourself, compete with friends, and become a part of the global trivia community today!</p>
+            <div class="cta-buttons">
+                <button class="play-now">Play Now</button>
+            </div>
+        </div>
+    </section>
+    <div class="popup_info">
+        <h2>Quiz Guide</h2>
+        <span class="info">Welcome to the Quiz!</span>
+        <span class="info">Here are the instructions to play:</span>
+        <span class="info">1.Each correct answer earns you one point.</span>
+        <span class="info">2.If you exit the quiz before completing it, you’ll receive zero points.</span>
+        <span class="info">3.You must choose the best option for each question within the given time.</span>
+        <span class="info">4.Once you select an answer, you cannot change it.</span>
+        <span class="info">5.Have fun and do your best!</span>
+        <div class="btn-group">
+            <button class="info-btn exit_btn">Exit Quiz</button>
+            <a href="#" class="info-btn continue-btn">Continue</a>
+        </div>
+    </div>
+</body>
+
+</html>
