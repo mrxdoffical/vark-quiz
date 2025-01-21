@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import RegisterForm
@@ -11,6 +11,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, 'you have logged in successfully!')
             return redirect('home')
         else:
             messages.error(request, 'Invalid username or password')
@@ -26,3 +27,8 @@ def register_view(request):
     else:
         form = RegisterForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'you have logged out!')
+    return redirect('home')
