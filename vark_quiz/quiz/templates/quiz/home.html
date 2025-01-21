@@ -34,30 +34,48 @@
             </select>
         </div>
     </header>
-    <section class="hero">
-        <div class="content">
-            <p class="subtitle">LET'S START THE GAME!</p>
-            <h1>Elevate Your Trivia Game to New Heights</h1>
-            <p class="description">Take your love for trivia to the next level with our immersive quiz experience. Challenge yourself, compete with friends, and become a part of the global trivia community today!</p>
-            <div class="cta-buttons">
-                <button class="play-now">Play Now</button>
+    <div class="container">
+        <section class="quiz-section">
+            <div class="quiz-box">
+                <h1>Codehal Quiz</h1>
+                <div class="quiz-header">
+                    <span>Quiz Website Tutorials</span>
+                </div>
+                <h2 class="question-text"></h2>
+                <div class="option-list"></div>
+                <div class="quiz-footer">
+                    <button class="next-btn">Next</button>
+                </div>
             </div>
-        </div>
-    </section>
-    <div class="popup_info">
-        <h2>Quiz Guide</h2>
-        <span class="info">Welcome to the Quiz!</span>
-        <span class="info">Here are the instructions to play:</span>
-        <span class="info">1.Each correct answer earns you one point.</span>
-        <span class="info">2.If you exit the quiz before completing it, you’ll receive zero points.</span>
-        <span class="info">3.You must choose the best option for each question within the given time.</span>
-        <span class="info">4.Once you select an answer, you cannot change it.</span>
-        <span class="info">5.Have fun and do your best!</span>
-        <div class="btn-group">
-            <button class="info-btn exit_btn">Exit Quiz</button>
-            <a href="#" class="info-btn continue-btn">Continue</a>
-        </div>
+        </section>
+        <section class="hero">
+            <div class="content">
+                <p class="subtitle">LET'S START THE GAME!</p>
+                <h1>Elevate Your Trivia Game to New Heights</h1>
+                <p class="description">Take your love for trivia to the next level with our immersive quiz experience. Challenge yourself, compete with friends, and become a part of the global trivia community today!</p>
+                <div class="cta-buttons">
+                    <button class="play-now">Play Now</button>
+                </div>
+            </div>
+        </section>
     </div>
+</main>
+
+<div class="popup_info">
+    <h2>Quiz Guide</h2>
+    <span class="info">1.Each correct answer earns you one point.</span>
+    <span class="info">2.If you exit the quiz before completing it, you’ll receive zero points.</span>
+    <span class="info">3.You must choose the best option for each question within the given time.</span>
+    <span class="info">4.Once you select an answer, you cannot change it.</span>
+    <span class="info">5.Have fun and do your best!</span>
+    <div class="btn-group">
+        <button class="info-btn exit_btn">Exit Quiz</button>
+        <a href="#" class="info-btn continue-btn">Continue</a>
+    </div>
+</div>
+<script src="{% static 'js/question.js' %}"></script>
+<script src="{% static 'js/qiuzscript.js' %}"></script>
+
 </body>
 
 </html>
