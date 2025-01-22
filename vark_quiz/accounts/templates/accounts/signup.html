@@ -1,3 +1,4 @@
+<!-- filepath: /home/bero/vark-quiz/vark_quiz/accounts/templates/accounts/signup.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -13,22 +14,23 @@
 
 <body>
     <div class="wrapper">
-        <form action="">
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
             <h1>Sign Up</h1>
             <div class="input-box">
-                <input type="text" placeholder="Full Name" required>
+                <input type="text" name="username" placeholder="Full Name" required>
                 <i class="bx bxs-user"></i>
             </div>
             <div class="input-box">
-                <input type="email" placeholder="Email" required>
+                <input type="email" name="email" placeholder="Email" required>
                 <i class="bx bxs-envelope"></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Password" required>
+                <input type="password" name="password1" placeholder="Password" required>
                 <i class="bx bxs-lock-alt"></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Confirm Password" required>
+                <input type="password" name="password2" placeholder="Confirm Password" required>
                 <i class="bx bxs-lock-alt"></i>
             </div>
             <button type="submit" class="btn">Sign Up</button>

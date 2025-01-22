@@ -9,6 +9,9 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/stylehome.css' %}">
     {% comment %} <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> {% endcomment %}
+    <script>
+        const isAuthenticated = {{ is_authenticated|yesno:"true,false" }};
+    </script>
 </head>
 
 <body>
@@ -35,7 +38,7 @@
                 </select>
             </div>
         </header>
-        <div class="container">
+        {% comment %} <div class="container">
             {% if messages %}
                 <div class="messages">
                     {% for message in messages %}
@@ -44,8 +47,9 @@
                         </div>
                     {% endfor %}
                 </div>
-            {% endif %}
+            {% endif %} {% endcomment %}
         <div class="container">
+            {% if user.is_authenticated %}
             <section class="quiz-section">
                 <div class="quiz-box">
                     <h1>Codehal Quiz</h1>
@@ -59,6 +63,9 @@
                     </div>
                 </div>
             </section>
+            {% else %}
+                <p>Please <a href="{% url 'login' %}">log in</a> to access the quiz.</p>
+            {% endif %}
             <section class="home">
                 <div class="home-content">
                     <h1>let's start the quiz!</h1>

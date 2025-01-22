@@ -4,6 +4,7 @@ from .models import Question, Answer, QuizResult
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
+@login_required
 def quiz_home(request):
     questions = Question.objects.all()
     return render(request, 'templates/quiz/home.html', {'questions': questions})

@@ -6,15 +6,15 @@ from .forms import RegisterForm
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, 'you have logged in successfully!')
+            messages.success(request, 'You have logged in successfully!')
             return redirect('home')
         else:
-            messages.error(request, 'Invalid username or password')
+            messages.error(request, 'Invalid email or password')
     return render(request, 'accounts/login.html')
 
 def register_view(request):
@@ -29,6 +29,9 @@ def register_view(request):
     return render(request, 'accounts/signup.html', {'form': form})
 
 def logout_view(request):
-    logout(request)
-    messages.success(request, 'you have logged out!')
+    if request.user.is_authenticated:
+        logout(request)
+        messages.success(request, 'You have logged out!')
+    else:
+        messages.info(request, 'You are not logged in')
     return redirect('home')

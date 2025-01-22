@@ -25,12 +25,10 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=150, unique=True)
-    age = models.PositiveIntegerField()
-    phone = models.CharField(max_length=15)
     password = models.CharField(max_length=128)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'age', 'phone']
+    REQUIRED_FIELDS = ['username']
 
     objects = UserManager()
 
