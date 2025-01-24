@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     {% load static %}
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
     <link rel="stylesheet" href="{% static 'css/stylehome.css' %}">
     {% comment %} <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> {% endcomment %}
     <script>
@@ -30,14 +27,14 @@
             <div class="auth-buttons">
                 {% if user.is_authenticated %}
                     <a href="{% url 'logout' %}">
-                        <button class="auth-bu logout">Log Out</button>
+                        <button class="auth-button logout">Log Out</button>
                     </a>
                 {% else %}
                     <a href="{% url 'login' %}">
-                        <button class="auth-bu login">Log In</button>
+                        <button class="auth-button login">Log In</button>
                     </a>
                     <a href="{% url 'register' %}">
-                        <button class="auth-bu signup">Sign Up</button>
+                        <button class="auth-button signup">Sign Up</button>
                     </a>
                 {% endif %}
                 <select class="lang">
@@ -68,21 +65,23 @@
                 }
                 </style>
         </header>
-        <div class="container">
+        {% comment %} <div class="container">
             {% if messages %}
                 <div class="messages">
                     {% for message in messages %}
-                    <div class="alert alert-primary" role="alert">
-                        A simple primary alert—check it out!
-                      </div>
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
                     {% endfor %}
                 </div>
-            {% endif %}
+            {% endif %} {% endcomment %}
+    
         <div class="container">
-            <section class="section-quiz">
-                <div class="box-quiz">
+            {% if user.is_authenticated %}
+            <section class="quiz-section">
+                <div class="quiz-box">
                     <h1>Codehal Quiz</h1>
-                    <div class="header-quiz">
+                    <div class="quiz-header">
                         <span>Quiz Website Tutorials</span>
                     </div>
                     <h2 class="question-text"></h2>
@@ -92,6 +91,9 @@
                     </div>
                 </div>
             </section>
+            {% else %}
+                <p>Please <a href="{% url 'login' %}">log in</a> to access the quiz.</p>
+            {% endif %}
             <section class="home">
                 <div class="home-content">
                     <h1>let's start the quiz!</h1>
