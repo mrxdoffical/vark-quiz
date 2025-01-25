@@ -1,6 +1,6 @@
+<!-- filepath: /home/bero/vark-quiz/vark_quiz/quiz/templates/quiz/home.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,21 +8,19 @@
     <title>Home</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/stylehome.css' %}">
-    {% comment %} <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> {% endcomment %}
     <script>
-        const isAuthenticated = {{ is_authenticated|yesno:"true,false" }};
+        const isAuthenticated = {{ user.is_authenticated|yesno:"true,false" }};
     </script>
 </head>
-
 <body>
     <main class="main">
         <header class="header">
             <a href="#" class="logo">Quiz</a>
             <nav class="navbar">
-            <a href="#">Home</a> 
-            <a href="#">About us</a> 
-            <a href="#">contact</a> 
-            <a href="#">service</a>   
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About us</a>
+                <a href="#">Contact</a>
+                <a href="#">Service</a>
             </nav>
             <div class="auth-buttons">
                 {% if user.is_authenticated %}
@@ -47,79 +45,65 @@
                 .auth-buttons {
                     display: flex;
                     align-items: center;
-                    gap: 10px; 
+                    gap: 10px;
                 }
-                
+
                 .auth-button {
                     padding: 10px 20px;
                     font-size: 14px;
-                    min-width: 100px; 
+                    min-width: 100px;
                     cursor: pointer;
-                    transition: all 0.3s ease; 
+                    transition: all 0.3s ease;
                 }
-                
+
                 .lang {
                     margin-left: 10px;
                     padding: 5px;
                     font-size: 14px;
                 }
-                </style>
+            </style>
         </header>
-        {% comment %} <div class="container">
-            {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %} {% endcomment %}
-    
         <div class="container">
-            {% if user.is_authenticated %}
             <section class="quiz-section">
                 <div class="quiz-box">
                     <h1>Codehal Quiz</h1>
                     <div class="quiz-header">
                         <span>Quiz Website Tutorials</span>
                     </div>
-                    <h2 class="question-text"></h2>
-                    <div class="option-list"></div>
+                    <div id="quiz-content">
+                        <!-- Questions and answers will be rendered here -->
+                    </div>
                     <div class="quiz-footer">
                         <button class="next-btn">Next</button>
                     </div>
                 </div>
             </section>
-            {% else %}
-                <p>Please <a href="{% url 'login' %}">log in</a> to access the quiz.</p>
-            {% endif %}
             <section class="home">
                 <div class="home-content">
-                    <h1>let's start the quiz!</h1>
+                    <h1>Let's start the quiz!</h1>
                     <p>Elevate Your Trivia Game to New Heights</p>
                     <button class="play-now">Play Now</button>
-                    
                 </div>
             </section>
         </div>
     </main>
 
-<div class="popup_info">
-    <h2>Quiz Guide</h2>
-    <span class="info">1.Each correct answer earns you one point.</span>
-    <span class="info">2.If you exit the quiz before completing it, you’ll receive zero points.</span>
-    <span class="info">3.You must choose the best option for each question within the given time.</span>
-    <span class="info">4.Once you select an answer, you cannot change it.</span>
-    <span class="info">5.Have fun and do your best!</span>
-    <div class="btn-group">
-        <button class="info-btn exit_btn">Exit Quiz</button>
-        <a href="#" class="info-btn continue-btn">Continue</a>
+    <div class="popup_info">
+        <h2>Quiz Guide</h2>
+        <span class="info">1. Each correct answer earns you one point.</span>
+        <span class="info">2. If you exit the quiz before completing it, you’ll receive zero points.</span>
+        <span class="info">3. You must choose the best option for each question within the given time.</span>
+        <span class="info">4. Once you select an answer, you cannot change it.</span>
+        <span class="info">5. Have fun and do your best!</span>
+        <span class="info">6. Select the question without skipping to answer it.</span>
+        <span class="info">7. Choose the response that best matches how you learn or approach situations.</span>
+        <div class="btn-group">
+            <button class="info-btn exit_btn">Exit Quiz</button>
+            <a href="#" class="info-btn continue-btn">Continue</a>
+        </div>
     </div>
-</div>
-<script src="{% static 'js/question.js' %}"></script>
-<script src="{% static 'js/qiuzscript.js' %}"></script>
-
+    <script id="isAuthenticated" type="application/json">{{ user.is_authenticated|yesno:"true,false" }}</script>
+    <script src="{% static 'js/question.js' %}"></script>
+    <script src="{% static 'js/qiuzscript.js' %}"></script>
 </body>
-
 </html>

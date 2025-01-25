@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+
 class Question(models.Model):
     text = models.CharField(max_length=255)
 
@@ -12,7 +13,7 @@ class Answer(models.Model):
     ]
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     text = models.CharField(max_length=255)
-    is_correct = models.BooleanField(default=False)
+    is_correct = models.BooleanField(default=True)
     letter = models.CharField(max_length=1, choices=LEARNING_PATTERNS)
 
 class QuizResult(models.Model):

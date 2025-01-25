@@ -1,0 +1,62 @@
+<!-- filepath: /home/bero/vark-quiz/vark_quiz/quiz/templates/quiz/result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styleresult.css' %}">
+    <pre>{{ results|safe }}</pre>
+</head>
+<body>
+    <main class="main">
+        <header class="header">
+            <a href="{% url 'home' %}" class="logo">Quiz</a>
+            <nav class="navbar">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About us</a>
+                <a href="#">Contact</a>
+                <a href="#">Service</a>
+            </nav>
+        </header>
+        <div class="container">
+            <h1>Quiz Results</h1>
+            <div id="results-summary">
+                {% if results.total_questions %}
+                    <p>You have been given {{ results.total_questions }} questions and the results are:</p>
+                    <p>{{ results.visual }} of the answers were Visual</p>
+                    <p>{{ results.reading_writing }} of the answers were Reading/Writing</p>
+                    <p>{{ results.auditory }} of the answers were Auditory</p>
+                    <p>{{ results.kinesthetic }} of the answers were Kinesthetic</p>
+                    <p>Your most productive learning pattern is 
+                        {% if results.visual >= results.reading_writing and results.visual >= results.auditory and results.visual >= results.kinesthetic %}
+                            Visual
+                        {% elif results.reading_writing >= results.visual and results.reading_writing >= results.auditory and results.reading_writing >= results.kinesthetic %}
+                            Reading/Writing
+                        {% elif results.auditory >= results.visual and results.auditory >= results.reading_writing and results.auditory >= results.kinesthetic %}
+                            Auditory
+                        {% else %}
+                            Kinesthetic
+                        {% endif %}
+                    </p>
+                {% else %}
+                    <p>No results available.</p>
+                {% endif %}
+            </div>
+            <div id="results-container">
+                {% if results.current_quiz_results %}
+                    {% for result in results.current_quiz_results %}
+                        <div class="result">
+                            <h2>Question: {{ result.question }}</h2>
+                            <p>Your Answer: {{ result.answer }}</p>
+                            <p>Correct: {{ result.is_correct|yesno:"Yes,No" }}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <script src="{% static 'js/question.js' %}">
+</body>
+</html>
