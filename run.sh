@@ -24,12 +24,6 @@ install_python_arch() {
     sudo pacman -Syu --noconfirm python python-virtualenv python-pip
 }
 
-# Function to install Python on Windows (using Chocolatey)
-install_python_windows() {
-    echo "Installing Python on Windows..."
-    choco install python -y
-}
-
 # Check the operating system
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "Detected Linux OS"
@@ -44,12 +38,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         exit 1
     fi
     PYTHON=python3
-elif [[ "$OSTYPE" == "msys" ]]; then
-    echo "Detected Windows OS"
-    if ! command_exists python; then
-        install_python_windows
-    fi
-    PYTHON=python
 else
     echo "Unsupported OS: $OSTYPE"
     exit 1
