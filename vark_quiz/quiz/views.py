@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Question, Answer, QuizResult, AggregatedQuizResult
+from tips.models import Tip
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
@@ -65,7 +66,12 @@ def quiz_result(request):
             kinesthetic=results_data['kinesthetic'],
             current_quiz_results=results_data['current_quiz_results']
         )
-        return render(request, 'quiz/result.html', {'results': results_data})
+
+        # Determine the dominant learning pattern
+        dominant_pattern = max(learning_patterns, key=learning_patterns.get)
+        tip = Tip.objects.filter(learning_pattern__pattern=dominant_pattern).first()
+
+        return render(request, 'quiz/result.html', {'results': results_data, 'tip': tip})
     
     elif request.method == 'GET':
         latest_results = AggregatedQuizResult.objects.filter(user=request.user).order_by('-id').first()
@@ -78,7 +84,18 @@ def quiz_result(request):
                 'kinesthetic': latest_results.kinesthetic,
                 'current_quiz_results': latest_results.current_quiz_results
             }
-            return render(request, 'quiz/result.html', {'results': results_data})
+
+            # Determine the dominant learning pattern
+            learning_patterns = {
+                'V': latest_results.visual,
+                'A': latest_results.auditory,
+                'R': latest_results.reading_writing,
+                'K': latest_results.kinesthetic
+            }
+            dominant_pattern = max(learning_patterns, key=learning_patterns.get)
+            tip = Tip.objects.filter(learning_pattern__pattern=dominant_pattern).first()
+
+            return render(request, 'quiz/result.html', {'results': results_data, 'tip': tip})
         else:
             return render(request, 'quiz/result.html', {'error': 'No results available'}, status=400)
     

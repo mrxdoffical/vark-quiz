@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Tips</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Learning Tips</h1>
+    <div class="tips-container">
+        {% for tip in tips %}
+            <div class="tip">
+                <h2>{{ tip.learning_pattern.get_pattern_display }}</h2>
+                <p>{{ tip.advice }}</p>
+                <a href="{{ tip.link }}" target="_blank">More Info</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

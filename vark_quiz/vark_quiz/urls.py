@@ -10,4 +10,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
+        path('tips/', include('tips.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

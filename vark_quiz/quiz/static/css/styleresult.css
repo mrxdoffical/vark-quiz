@@ -1,37 +1,64 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f9;
+    background: url('../img/digital-art-isolated-house.jpg') no-repeat fixed center;
+    background-size: cover;
     color: #333;
     margin: 0;
     padding: 0;
 }
 
 .header {
-    background-color: #85008a;
+    background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent background */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Semi-transparent border */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px); /* Frosted glass effect for Safari */
     color: #fff;
     padding: 20px;
     text-align: center;
+    position: fixed; /* Fixed at the top */
+    width: 100%; /* Full width */
+    top: 0; /* Align to the top */
+    z-index: 1000; /* Ensure it is above other elements */
 }
 
 .header .logo {
     font-size: 24px;
-    color: #fff;
+    color: white;
     text-decoration: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar a {
-    color: #fff;
+    color: white;
     text-decoration: none;
     margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #85008a;
 }
 
 .container {
+    position: relative; /* Ensure the container is positioned relative */
     max-width: 800px;
-    margin: 50px auto;
+    margin: 100px auto 50px; /* Adjust margin to account for fixed navbar */
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    padding-bottom: 60px; /* Add padding to the bottom to create space for the button */
+    background: rgba(0, 0, 0, 0.5); /* Darker and less transparent background */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Less transparent border */
+    border-radius: 8px; /* Rounded corners */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px); /* Frosted glass effect for Safari */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), /* First layer of shadow */
+                0 8px 16px rgba(0, 0, 0, 0.1), /* Second layer of shadow */
+                0 16px 32px rgba(0, 0, 0, 0.1); /* Third layer of shadow */
+    color: #fff; /* Text color */
 }
 
 h1 {
@@ -57,4 +84,49 @@ h1 {
     background-color: #4CAF50; /* Green */
     color: white;
     transition: background-color 0.3s ease;
+}
+
+#see-more-btn {
+    background-color: #85008a; /* Button background color */
+    color: #fff; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    font-weight: 600; /* Font weight */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    position: absolute; /* Position the button absolutely */
+    bottom: 20px; /* Position the button 20px from the bottom */
+    left: 50%; /* Center the button horizontally */
+    transform: translateX(-50%); /* Adjust for the button's width */
+}
+
+#see-more-btn:hover {
+    background-color: #a000b0; /* Slightly lighter background color on hover */
+    transform: translate(-50%, -2px); /* Slight upward movement on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly larger shadow on hover */
+}
+
+#see-more-btn:active {
+    transform: translateX(-50%); /* Reset transform on click */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Reset shadow on click */
+}
+
+.tip a {
+    color: rgb(140, 231, 54); /* Initial link color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the text bold */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.tip a:hover {
+    color: black; /* Change color on hover */
+    transform: translateY(-2px); /* Move up slightly on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+.tips-container {
+    margin-bottom: 20px;
 }

@@ -117,11 +117,13 @@ document.addEventListener('DOMContentLoaded', function() {
         nextBtn.textContent = isLastQuestion ? 'Submit' : 'Next';
         nextBtn.disabled = true;
         nextBtn.classList.remove('active');
+        nextBtn.style.pointerEvents = 'none'; // Ensure the button is unclickable initially
 
         const quizForm = document.getElementById('quiz-form');
         quizForm.addEventListener('change', function() {
             nextBtn.disabled = false;
             nextBtn.classList.add('active');
+            nextBtn.style.pointerEvents = 'auto'; // Make the button clickable
         });
     }
 

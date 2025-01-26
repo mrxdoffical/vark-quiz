@@ -15,8 +15,6 @@
             <nav class="navbar">
                 <a href="{% url 'home' %}">Home</a>
                 <a href="{% url 'about' %}">About us</a>
-                <a href="#">Contact</a>
-                <a href="#">Service</a>
             </nav>
         </header>
         <div class="container">
@@ -43,6 +41,18 @@
                     <p>No results available.</p>
                 {% endif %}
             </div>
+            <div class="tips-container">
+                <h2>Learning Tips</h2>
+                {% if tip %}
+                    <div class="tip">
+                        <h3>{{ tip.learning_pattern.get_pattern_display }}</h3>
+                        <p>{{ tip.advice }}</p>
+                        <a href="{{ tip.link }}" target="_blank">More Info about your learning pattern</a>
+                    </div>
+                {% else %}
+                    <p>No tips available.</p>
+                {% endif %}
+            </div>
             <button id="see-more-btn">See More</button>
             <div id="results-container" style="display: none;">
                 {% if results.current_quiz_results %}
@@ -50,7 +60,17 @@
                         <div class="result">
                             <h2>Question: {{ result.question }}</h2>
                             <p>Your Answer: {{ result.answer }}</p>
-                            <p>Learning Pattern: {{ result.answer_type }}</p>
+                            <p>Learning Pattern: 
+                                {% if result.answer_type == 'V' %}
+                                    Visual
+                                {% elif result.answer_type == 'A' %}
+                                    Auditory
+                                {% elif result.answer_type == 'R' %}
+                                    Reading/Writing
+                                {% elif result.answer_type == 'K' %}
+                                    Kinesthetic
+                                {% endif %}
+                            </p>
                         </div>
                     {% endfor %}
                 {% endif %}

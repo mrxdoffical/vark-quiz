@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import LearningPattern, Tip
 
-# Register your models here.
+admin.site.register(LearningPattern)
+admin.site.register(Tip)
