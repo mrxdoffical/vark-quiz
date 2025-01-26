@@ -20,14 +20,21 @@ To set up and run the VARK Quiz application, follow these steps:
     ```
 
 2. Run the setup script:
-    ```bash
-    ./run.sh
-    ```
+
+    - On Linux:
+        ```bash
+        ./run.sh
+        ```
+
+    - On Windows:
+        ```batch
+        run.bat
+        ```
 
 This script will:
 - Check for Python and install it if necessary.
 - Create a virtual environment and activate it.
-- Install the necessary dependencies from [requirements.txt](http://_vscodecontentref_/1).
+- Install the necessary dependencies from [requirements.txt](http://_vscodecontentref_/4).
 - Apply database migrations.
 - Start the development server.
 
