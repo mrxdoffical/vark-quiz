@@ -7,7 +7,6 @@
     <title>Quiz Results</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styleresult.css' %}">
-    <pre>{{ results|safe }}</pre>
 </head>
 <body>
     <main class="main">
@@ -44,19 +43,36 @@
                     <p>No results available.</p>
                 {% endif %}
             </div>
-            <div id="results-container">
+            <button id="see-more-btn">See More</button>
+            <div id="results-container" style="display: none;">
                 {% if results.current_quiz_results %}
                     {% for result in results.current_quiz_results %}
                         <div class="result">
                             <h2>Question: {{ result.question }}</h2>
                             <p>Your Answer: {{ result.answer }}</p>
-                            <p>Correct: {{ result.is_correct|yesno:"Yes,No" }}</p>
+                            <p>Learning Pattern: {{ result.answer_type }}</p>
                         </div>
                     {% endfor %}
                 {% endif %}
             </div>
         </div>
     </main>
-    <script src="{% static 'js/question.js' %}">
+    <script src="{% static 'js/question.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const seeMoreBtn = document.getElementById('see-more-btn');
+            const resultsContainer = document.getElementById('results-container');
+
+            seeMoreBtn.addEventListener('click', function() {
+                if (resultsContainer.style.display === 'none') {
+                    resultsContainer.style.display = 'block';
+                    seeMoreBtn.textContent = 'See Less';
+                } else {
+                    resultsContainer.style.display = 'none';
+                    seeMoreBtn.textContent = 'See More';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

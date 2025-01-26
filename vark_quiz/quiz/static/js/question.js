@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const popupInfo = document.querySelector('.popup_info');
     const exitBtn = document.querySelector('.exit_btn');
     const continueBtn = document.querySelector('.continue-btn');
+    const nextBtn = document.getElementById('next-btn'); // Use id for easier control
     const main = document.querySelector('.main');
     const isAuthenticated = JSON.parse(document.getElementById('isAuthenticated').textContent);
     let currentQuestionIndex = 0;
@@ -110,29 +111,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 <label for="answer_${answer.id}">${answer.text}</label>
               </div>
             `).join('')}
-            <button type="submit">${isLastQuestion ? 'Submit' : 'Next'}</button>
           </form>
         `;
 
+        nextBtn.textContent = isLastQuestion ? 'Submit' : 'Next';
+        nextBtn.disabled = true;
+        nextBtn.classList.remove('active');
+
         const quizForm = document.getElementById('quiz-form');
-        quizForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
-            if (selectedAnswer) {
-                const answerLetter = selectedAnswer.getAttribute('data-letter');
-                learningPatterns[answerLetter]++;
-                currentQuizResults.push({
-                    question: question.text,
-                    answer: selectedAnswer.nextElementSibling.textContent,
-                    is_correct: selectedAnswer.getAttribute('data-correct') === 'true',
-                    answer_type: answerLetter
-                });
-                console.log('Current Quiz Results:', currentQuizResults); // Debugging line
-                currentQuestionIndex++;
-                renderQuestion();
-            } else {
-                alert('Please select an answer.');
-            }
+        quizForm.addEventListener('change', function() {
+            nextBtn.disabled = false;
+            nextBtn.classList.add('active');
         });
     }
+
+    nextBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+        if (selectedAnswer) {
+            const answerLetter = selectedAnswer.getAttribute('data-letter');
+            learningPatterns[answerLetter]++;
+            currentQuizResults.push({
+                question: questions[currentQuestionIndex].text,
+                answer: selectedAnswer.nextElementSibling.textContent,
+                is_correct: selectedAnswer.getAttribute('data-correct') === 'true',
+                answer_type: answerLetter
+            });
+            console.log('Current Quiz Results:', currentQuizResults); // Debugging line
+            currentQuestionIndex++;
+            renderQuestion();
+        } else {
+            alert('Please select an answer.');
+        }
+    });
 });

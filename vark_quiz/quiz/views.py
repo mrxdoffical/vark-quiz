@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Question, Answer, QuizResult
+from .models import Question, Answer, QuizResult, AggregatedQuizResult
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
@@ -56,13 +56,34 @@ def quiz_result(request):
             'kinesthetic': learning_patterns.get('K', 0),
             'current_quiz_results': current_quiz_results
         }
-        print('Results data:', results_data) # Debugging line
+        AggregatedQuizResult.objects.create(
+            user=request.user,
+            total_questions=results_data['total_questions'],
+            visual=results_data['visual'],
+            auditory=results_data['auditory'],
+            reading_writing=results_data['reading_writing'],
+            kinesthetic=results_data['kinesthetic'],
+            current_quiz_results=results_data['current_quiz_results']
+        )
         return render(request, 'quiz/result.html', {'results': results_data})
+    
+    elif request.method == 'GET':
+        latest_results = AggregatedQuizResult.objects.filter(user=request.user).order_by('-id').first()
+        if latest_results:
+            results_data = {
+                'total_questions': latest_results.total_questions,
+                'visual': latest_results.visual,
+                'auditory': latest_results.auditory,
+                'reading_writing': latest_results.reading_writing,
+                'kinesthetic': latest_results.kinesthetic,
+                'current_quiz_results': latest_results.current_quiz_results
+            }
+            return render(request, 'quiz/result.html', {'results': results_data})
+        else:
+            return render(request, 'quiz/result.html', {'error': 'No results available'}, status=400)
+    
     else:
-        return render(request, 'quiz/result.html', {'results': {}})
-
-def quiz_results_page(request):
-    return render(request, 'quiz/result.html', {'results': {}})
+        return render(request, 'quiz/result.html', {'error': 'Invalid request method.', 'user': request.user})
 
 def home(request):
     return render(request, 'quiz/home.html')

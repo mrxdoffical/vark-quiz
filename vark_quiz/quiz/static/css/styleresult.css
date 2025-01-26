@@ -52,3 +52,9 @@ h1 {
 .result p {
     margin: 5px 0;
 }
+
+.next-btn.active {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    transition: background-color 0.3s ease;
+}
